@@ -25,7 +25,7 @@ $user->lastName = $data->lastName;
 $user->personNummer = $data->personNummer;
 
 //Create user
-	if($user->create_user()){
+	if($user->createUser()){
 		echo json_encode(
 			array('message' => 'User Created')
 		);

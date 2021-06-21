@@ -119,7 +119,7 @@ Class User {
             }
 
     //Create user
-    public function create_user(){
+    public function createUser(){
 
         //Create query
         $query = 'INSERT INTO ' . $this->table . '
