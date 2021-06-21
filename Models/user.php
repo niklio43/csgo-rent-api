@@ -118,42 +118,49 @@ Class User {
                     return false;
             }
 
-    //Create user
-    public function createUser(){
+            public function createUser() {
 
-        //Create query
-        $query = 'INSERT INTO ' . $this->table . '
-        SET
-            firstName = :firstName,
-            middleName = :middleName,
-            lastName = :lastName,
-            personNummer = :personNummer'
-			;
-
-            //Preparing statement
-            $stmt = $this->conn->prepare($query);
-
-            //Clean data
-            $this->firstName =htmlspecialchars(strip_tags($this->firstName));
-            $this->middleName =htmlspecialchars(strip_tags($this->middleName));
-            $this->lastName =htmlspecialchars(strip_tags($this->lastName));
-            $this->personNummer =htmlspecialchars(strip_tags($this->personNummer));
-
-            //Bind data
-            $stmt->bindParam(':firstName', $this->firstName);
-            $stmt->bindParam(':middleName', $this->middleName);
-            $stmt->bindParam(':lastName', $this->lastName);
-            $stmt->bindParam(':personNummer', $this->personNummer);
-
-            //Executing query
-            if($stmt->execute()){
-                return true;
+                function RandomString()
+                {
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $randstring = '';
+                    for ($i = 0; $i < 20; $i++) {
+                        $randstring = $randstring.$characters[rand(0, strlen($characters)-1)];
+                    }
+                    return $randstring;
+                }
+        
+                // Create query
+                $query = 'INSERT INTO ' . $this->table . ' SET firstName = :firstName, middleName = :middleName, lastName = :lastName, personNummer = :personNummer, apiKey = :apiKey, expiration = CURRENT_TIME()';
+        
+                // Prepare statement
+                $stmt = $this->conn->prepare($query);
+        
+                // Clean data
+                $this->firstName = htmlspecialchars(strip_tags($this->firstName));
+                $this->middleName = htmlspecialchars(strip_tags($this->middleName));
+                $this->lastName = htmlspecialchars(strip_tags($this->lastName));
+                $this->personNummer = htmlspecialchars(strip_tags($this->personNummer));
+        
+                $randStr = RandomString();
+        
+                // Bind data
+                $stmt->bindParam(':firstName', $this->firstName);
+                $stmt->bindParam(':middleName', $this->middleName);
+                $stmt->bindParam(':lastName', $this->lastName);
+                $stmt->bindParam(':personNummer', $this->personNummer);
+                $stmt->bindParam(':apiKey', $randStr);
+        
+                // Execute query
+                if($stmt->execute()) {
+                  return true;
             }
-
-            //Print error
+        
+            // Print error if something goes wrong
             printf("Error: %s.\n", $stmt->error);
+        
             return false;
-    }
+          }
     
 }
 ?>
