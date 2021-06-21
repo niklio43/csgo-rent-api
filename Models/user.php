@@ -118,35 +118,42 @@ Class User {
                     return false;
             }
 
-    public function createUser() {
-        // Create query
-        $query = 'INSERT INTO ' . $this->table . ' SET firstName = :firstName, middleName = :middleName, lastName = :lastName, personNummer = :personNummer';
+    //Create user
+    public function create_user(){
 
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
+        //Create query
+        $query = 'INSERT INTO ' . $this->table . '
+        SET
+            firstName = :firstName,
+            middleName = :middleName,
+            lastName = :lastName,
+            personNummer = :personNummer'
+			;
 
-        // Clean data
-        $this->firstName = htmlspecialchars(strip_tags($this->firstName));
-        $this->middleName = htmlspecialchars(strip_tags($this->middleName));
-        $this->lastName = htmlspecialchars(strip_tags($this->lastName));
-        $this->personNummer = htmlspecialchars(strip_tags($this->personNummer));
+            //Preparing statement
+            $stmt = $this->conn->prepare($query);
 
-        // Bind data
-        $stmt->bindParam(':firstName', $this->firstName);
-        $stmt->bindParam(':middleName', $this->middleName);
-        $stmt->bindParam(':lastName', $this->lastName);
-        $stmt->bindParam(':personNummer', $this->personNummer);
+            //Clean data
+            $this->firstName =htmlspecialchars(strip_tags($this->firstName));
+            $this->middleName =htmlspecialchars(strip_tags($this->middleName));
+            $this->lastName =htmlspecialchars(strip_tags($this->lastName));
+            $this->personNummer =htmlspecialchars(strip_tags($this->personNummer));
 
-        // Execute query
-        if($stmt->execute()) {
-          return true;
+            //Bind data
+            $stmt->bindParam(':firstName', $this->firstName);
+            $stmt->bindParam(':middleName', $this->middleName);
+            $stmt->bindParam(':lastName', $this->lastName);
+            $stmt->bindParam(':personNummer', $this->personNummer);
+
+            //Executing query
+            if($stmt->execute()){
+                return true;
+            }
+
+            //Print error
+            printf("Error: %s.\n", $stmt->error);
+            return false;
     }
-
-    // Print error if something goes wrong
-    printf("Error: %s.\n", $stmt->error);
-
-    return false;
-  }
     
 }
 ?>
