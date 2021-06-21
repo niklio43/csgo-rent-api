@@ -118,48 +118,6 @@ Class User {
                     return false;
             }
 
-    /*public function createUser(){
-        function RandomString()
-        {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $randstring = '';
-            for ($i = 0; $i < 20; $i++) {
-                $randstring = $randstring.$characters[rand(0, strlen($characters)-1)];
-            }
-            return $randstring;
-        }
-
-        $query = 'INSERT INTO ' . $this->table . '
-        SET
-            firstName = :firstName,
-            middleName = :middleName,
-            lastName = :lastName,
-            personNummer = :personNummer
-            apiKey = :apiKey';
-
-            $stmt = $this->conn->prepare($query);
-
-            $this->firstName = htmlspecialchars(strip_tags($this->firstName));
-            $this->middleName = htmlspecialchars(strip_tags($this->middleName));
-            $this->lastName = htmlspecialchars(strip_tags($this->lastName));
-            $this->personNummer = htmlspecialchars(strip_tags($this->personNummer));
-
-            $stmt->bindParam(':firstName', $this->firstName);
-            $stmt->bindParam(':middleName', $this->middleName);
-            $stmt->bindParam(':lastName', $this->lastName);
-            $stmt->bindParam(':personNummer', $this->personNummer);
-            //$stmt->bindParam(':apiKey', RandomString());
-
-            //Executing query
-            if($stmt->execute()){
-                return true;
-            }
-
-            //Print error
-            printf("Error: %s.\n", $stmt->error);
-            return false;
-    }*/
-
     public function createUser() {
         // Create query
         $query = 'INSERT INTO ' . $this->table . ' SET firstName = :firstName, middleName = :middleName, lastName = :lastName, personNummer = :personNummer';
