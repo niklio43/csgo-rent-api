@@ -21,6 +21,7 @@ Class User {
 
     public function readUser(){
 
+        //request
         $query = 'SELECT * FROM ' . $this->table . '';
 
         $stmt = $this->conn->prepare($query);
