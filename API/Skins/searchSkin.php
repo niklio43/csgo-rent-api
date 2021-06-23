@@ -23,7 +23,7 @@ $rowCount = $result->rowCount();
 if($rowCount > 0){
 
     $skin_arr = array();
-    $skin_arr['data'] = array();
+    $skin_arr['search'] = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
 
@@ -36,12 +36,12 @@ if($rowCount > 0){
             'name' => $name
         );
 
-        array_push($skin_arr['data'], $skin_item);
+        array_push($skin_arr['search'], $skin_item);
     }
 
 
 
-    $skin_arr['data']=array_map("unserialize", array_unique(array_map("serialize", $skin_arr['data'])));
+    $skin_arr['search']=array_map("unserialize", array_unique(array_map("serialize", $skin_arr['search'])));
     echo json_encode($skin_arr);
 
 } else {
