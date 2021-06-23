@@ -11,7 +11,7 @@ $database = new Database();
 $db = $database->connect();
 
 //Instantiate post object
-$skin = new Service($db);
+$skin = new Search($db);
 
 //Get name from URL
 $skin->name = isset($_GET['name']) ? $_GET['name'] : die();
