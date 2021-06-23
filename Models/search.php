@@ -12,12 +12,27 @@ class Search {
         }
 
         public function searchSkin(){
-            $sql = "SELECT * FROM ". $this->table . " WHERE name LIKE '%$this->name%'";
+            $sql = "SELECT * FROM ". $this->table . " WHERE name LIKE '%?%'";
         
             $stmt = $this->conn->prepare($sql);
 
-        $stmt->execute();
-        return $stmt;
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(1, $this->name);
+
+            $stmt->execute();
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->skinID = $row['skinID'];
+            $this->name = $row['name'];
+            $this->market_name = $row['market_name'];
+            $this->icon_url = $row['icon_url'];
+            $this->link = $row['link'];
+            $this->price = $row['price'];
+            $this->steamID = $row['steamID'];
+            $this->float_value = $row['float_value'];
+            $this->patternSeed = $row['patternSeed'];
         }
     }
 

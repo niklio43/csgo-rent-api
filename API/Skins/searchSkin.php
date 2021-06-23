@@ -1,4 +1,4 @@
-,<?php
+<?php
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
@@ -10,29 +10,29 @@ include_once '../../Models/search.php';
 $database = new Database();
 $db = $database->connect();
 
-//Instantiate post object
-$skin = new Search($db);
+//Instantiate user object
+$search = new Search($db);
 
 //Get name from URL
-$skin->name = isset($_GET['name']) ? $_GET['name'] : die();
+$search->name = isset($_GET['name']) ? $_GET['name'] : die();
 
-//Get post
-$skin->searchSkin();
+//Get skin data
+$search->searchSkin();
 
 //Create array
-$skin_arr = array(
-    'skinID' => $skin->skinID,
-    'name' => $skin->name,
-    'market_name' => $skin->market_name,
-    'icon_url' => $skin->icon_url,
-    'link' => $skin->link,¨
-    'price' => $skin->price,
-    'steamID' => $skin->steamID,
-    'float_value' => $skin->float_value,
-    'patternSeed' => $skin->patternSeed
+$search_arr = array(
+    'skinID' => $search->skinID,
+    'name' => $search->name,
+    'market_name' => $search->market_name,
+    'icon_url' => $search->icon_url,
+    'link' => $search->link,¨
+    'price' => $search->price,
+    'steamID' => $search->steamID,
+    'float_value' => $search->float_value,
+    'patternSeed' => $search->patternSeed
 );
 
 //Make JSON
-print_r(json_encode($skin_arr));
+print_r(json_encode($search_arr));
 
 ?>
