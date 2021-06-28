@@ -6,21 +6,20 @@ class Search {
         private $table = 'skin';
     
         public $name;
-        public $search;
 
         public function __construct($db) {
             $this->conn = $db;
         }
 
         public function searchSkin(){
-            $sql = 'SELECT * FROM ' . $this->table . ' WHERE name LIKE "%'.$this->search.'%"';
+            $sql = 'SELECT * FROM ' . $this->table . ' WHERE name LIKE "%'.$this->name.'%"';
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute();
 
             return $stmt;
-            
+
         }
     }
 
