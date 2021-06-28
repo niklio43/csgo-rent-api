@@ -12,7 +12,7 @@ class Search {
         }
 
         public function searchSkin(){
-            $sql = "SELECT * FROM ". $this->table . " WHERE name LIKE '%?%'";
+            $sql = "SELECT * FROM `skin` WHERE name LIKE '%AUG%'";
         
             $stmt = $this->conn->prepare($sql);
 
