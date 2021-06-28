@@ -10,7 +10,7 @@ $db = $database->connect();
 
 $search = new Search($db);
 
-$search->search = isset($_GET['name']) ? $_GET['name'] : die('Test2');
+$search->search = isset($_GET['name']) ? $_GET['name'] : die('No Skins Found');
 
 $result = $search->searchSkin();
 
