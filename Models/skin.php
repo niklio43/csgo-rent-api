@@ -46,6 +46,20 @@ Class skin{
         $this->price = $row['price'];
     }
 
+    public function searchSkin(){
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE name LIKE :name';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindValue(':name','%'.$this->name.'%',PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->name = $row['name'];
+    }
+
             public function updateSkins(){
 
                 $query = 'UPDATE ' . $this->table . '

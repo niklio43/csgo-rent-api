@@ -3,38 +3,22 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../Config/Database.php';
-include_once '../../Models/search.php';
+include_once '../../Models/skin.php';
+
 
 $database = new Database();
 $db = $database->connect();
 
-$search = new Search($db);
+$skin = new Skin($db);
 
-$search->search = isset($_GET['name']) ? $_GET['name'] : die('No Skins Found');
+$skin->name = isset($_GET['name']) ? $_GET['name'] : die();
 
-$result = $search->searchSkin();
+$skin->searchSkin();
 
-$rowCount = $result->rowCount();
+$skin_arr = array(
+    'name' => $skin->name,
+);
 
-if($rowCount > 0){
-    $search_arr = array();
-
-    while($row = $result->fetch(PDO::FETCH_ASSOC)){
-        extract($row);
-
-        $search_item = array(
-            'name' => $name
-        );
-
-        array_push($search_arr, $search_item);
-    }
-
-    echo json_encode($search_arr);
-
-} else {
-    echo json_encode(
-        array('message' => 'No Skins Found')
-    );
-}
+print_r(json_encode($skin_arr));
 
 ?>
