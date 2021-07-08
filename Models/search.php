@@ -12,7 +12,7 @@ class Search {
         }
 
         public function searchSkin(){
-            $sql = "SELECT * FROM " . $this->table . " WHERE name LIKE %$name%";
+            $sql = "SELECT * FROM " . $this->table . " WHERE name LIKE %"$name"%;
 
             $stmt = $this->conn->prepare($sql);
 
