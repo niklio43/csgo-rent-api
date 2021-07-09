@@ -47,7 +47,8 @@ Class skin{
     }
 
     public function searchSkin(){
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE :name != "" AND name LIKE :name';
+        if($this->name != ""){
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE name LIKE :name';
 
         $stmt = $this->conn->prepare($query);
 
@@ -58,6 +59,7 @@ Class skin{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->name = $row['name'];
+        }
     }
 
             public function updateSkins(){
