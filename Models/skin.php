@@ -47,11 +47,11 @@ Class skin{
     }
 
     public function searchSkin(){
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE name LIKE :name';
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE :name = "" OR name LIKE :name';
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(':name',$this->name.'%',PDO::PARAM_STR);
+        $stmt->bindValue(':name','%'.$this->name.'%',PDO::PARAM_STR);
 
         $stmt->execute();
 
