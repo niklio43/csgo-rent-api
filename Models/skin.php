@@ -48,7 +48,7 @@ Class skin{
 
     public function searchSkin(){
         if($this->name != ""){
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE name LIKE :name';
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE name COLLATE UTF8_GENERAL_CI LIKE :name';
 
         $stmt = $this->conn->prepare($query);
 
