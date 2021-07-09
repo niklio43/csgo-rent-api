@@ -47,7 +47,7 @@ Class skin{
     }
 
     public function searchSkin(){
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE :name = "" OR name LIKE :name';
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE :name != "" AND name LIKE :name';
 
         $stmt = $this->conn->prepare($query);
 
