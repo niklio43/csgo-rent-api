@@ -13,11 +13,17 @@ $skin = new Skin($db);
 
 $skin->name = isset($_GET['name']) ? $_GET['name'] : die();
 
-$skin->searchSkin();
+$result = $skin->searchSkin();
 
-$skin_arr = array();
+$num = $result->rowCount();
 
-$skin_arr['data'] = array();
+if($num > 0){
+
+    $skin_arr = array();
+    $skin_arr['data'] = array();
+
+    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        extract($row);
 
     $skin_item = array(
 	'name' => $skin->name
@@ -25,6 +31,14 @@ $skin_arr['data'] = array();
 
     array_push($skin_arr['data'], $skin_item);
 
-print_r(json_encode($skin_arr));
+}
+
+echo json_encode($skin_arr);
+
+}else{
+    echo json_encode(
+        array('message' => 'No results found')
+    );
+}
 
 ?>
