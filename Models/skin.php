@@ -51,7 +51,7 @@ Class skin{
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindValue(':name','%'.$this->name.'%',PDO::PARAM_STR);
+        $stmt->bindValue(':name',$this->name.'%',PDO::PARAM_STR);
 
         $stmt->execute();
 
