@@ -15,9 +15,11 @@ $skin->name = isset($_GET['name']) ? $_GET['name'] : die();
 $result = $skin->searchSkin();
 
 if(is_null($result)){
-    echo json_encode(
-        array('message' => 'No results found')
+    
+    $result = array(
+        'name' => ''
     );
+
 }else{
 
 $num = $result->rowCount();
@@ -42,8 +44,9 @@ if($num > 0){
 }else{
 
 echo json_encode(
-    array('message' => 'No results found')
+    array('message' => 'No skins found')
 );
 }
 }
+
 ?>
