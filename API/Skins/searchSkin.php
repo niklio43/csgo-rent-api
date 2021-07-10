@@ -10,21 +10,34 @@ $database = new Database();
 $db = $database->connect();
 
 $skin = new Skin($db);
-
 $skin->name = isset($_GET['name']) ? $_GET['name'] : die();
 
-$skin->searchSkin();
+$result = $skin->searchSkin();
 
-$skin_arr = array();
+$num = $result->rowCount();
 
-$skin_arr['data'] = array();
+if($num > 0){
 
-    $skin_item = array(
-	'name' => $skin->name
-    );
+    $skin_arr = array();
+    $skin_arr['data'] = array();
 
-    array_push($skin_arr['data'], $skin_item);
+    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        extract($row);
 
-print_r(json_encode($skin_arr));
+        $skin_item = array(
+            'name' => $name
+        );
+
+        array_push($skin_arr['data'], $skin_item);
+    }
+
+    echo json_encode($skin_arr);
+
+}else{
+
+echo json_encode(
+    array('message' => 'No skins found')
+);
+}
 
 ?>

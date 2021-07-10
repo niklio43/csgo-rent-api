@@ -56,12 +56,7 @@ Class skin{
 
         $stmt->execute();
 
-        $results = array();
-
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $results[] = $row['name'];
-            $this->name = $results;
-        }
+        return $stmt;
         }
     }
 
