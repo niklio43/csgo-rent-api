@@ -1,10 +1,10 @@
 <?php 
   class Database {
     // DB Params
-    private $host = 'localhost';
+    private $host = '206.81.27.23';
     private $db_name = 'csgorent';
-    private $username = 'root';
-    private $password = '';
+    private $username = 'admin';
+    private $password = 'f87f7cb906f269d7bca1d4d8df380c253700d1aa9cec832b';
     private $conn;
 
     // DB Connect

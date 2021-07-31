@@ -120,19 +120,9 @@ Class User {
             }
 
             public function createUser() {
-
-                function RandomString()
-                {
-                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $randstring = '';
-                    for ($i = 0; $i < 20; $i++) {
-                        $randstring = $randstring.$characters[rand(0, strlen($characters)-1)];
-                    }
-                    return $randstring;
-                }
         
                 // Create query
-                $query = 'INSERT INTO ' . $this->table . ' SET firstName = :firstName, middleName = :middleName, lastName = :lastName, personNummer = :personNummer, apiKey = :apiKey, expiration = CURRENT_TIME()';
+                $query = 'INSERT INTO ' . $this->table . ' SET firstName = :firstName, middleName = :middleName, lastName = :lastName, personNummer = :personNummer, expiration = CURRENT_TIME()';
         
                 // Prepare statement
                 $stmt = $this->conn->prepare($query);
@@ -143,14 +133,11 @@ Class User {
                 $this->lastName = htmlspecialchars(strip_tags($this->lastName));
                 $this->personNummer = htmlspecialchars(strip_tags($this->personNummer));
         
-                $randStr = RandomString();
-        
                 // Bind data
                 $stmt->bindParam(':firstName', $this->firstName);
                 $stmt->bindParam(':middleName', $this->middleName);
                 $stmt->bindParam(':lastName', $this->lastName);
                 $stmt->bindParam(':personNummer', $this->personNummer);
-                $stmt->bindParam(':apiKey', $randStr);
         
                 // Execute query
                 if($stmt->execute()) {
