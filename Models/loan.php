@@ -9,7 +9,7 @@ Class Loan{
     public $skinID;
     public $userID;
     public $startDate;
-    public $endDate = date("Y/m/d",strtotime('+30 days')); //ksk inte fungerar
+    public $endDate = "";//date("Y/m/d",strtotime('+30 days')); //ksk inte fungerar
     public $expired;
 
     public function __construct($db){
