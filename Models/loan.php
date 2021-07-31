@@ -44,7 +44,6 @@ Class Loan{
         $this->startDate = $row['startDate'];
         $this->endDate = $row['endDate'];
         $this->expired = $row['expired'];
-
     }
 
             public function updateLoan(){
@@ -109,5 +108,24 @@ Class Loan{
             printf("Error: %s.\n", $stmt->error);
             return false;
     }
+
+
+    public function assembleLoanData(){
+        $query = "SELECT userID, tradeUrl, skinID FROM user, skin WHERE user.userID = ? AND skin.skinID = ?";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $this->userID);
+        $stmt->bindParam(2, $this->skinID);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->userID = $row['userID'];
+        $this->skinID = $row['skinID'];
+        $this->tradeUrl = $row['tradeUrl'];
+    }
+    
 }
 ?>
