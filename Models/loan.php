@@ -9,8 +9,10 @@ Class Loan{
     public $skinID;
     public $userID;
     public $startDate;
-    public $endDate = "";//date("Y/m/d",strtotime('+30 days')); //ksk inte fungerar
+    public $endDate;//date("Y/m/d",strtotime('+30 days')); //ksk inte fungerar
     public $expired;
+    public $tradeUrl;
+
 
     public function __construct($db){
         $this->conn = $db;
@@ -44,6 +46,7 @@ Class Loan{
         $this->startDate = $row['startDate'];
         $this->endDate = $row['endDate'];
         $this->expired = $row['expired'];
+
     }
 
             public function updateLoan(){
@@ -109,7 +112,6 @@ Class Loan{
             return false;
     }
 
-
     public function assembleLoanData(){
         $query = "SELECT userID, tradeUrl, skinID FROM user, skin WHERE user.userID = ? AND skin.skinID = ?";
 
@@ -126,6 +128,6 @@ Class Loan{
         $this->skinID = $row['skinID'];
         $this->tradeUrl = $row['tradeUrl'];
     }
-    
+
 }
 ?>
