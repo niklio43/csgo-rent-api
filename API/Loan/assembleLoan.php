@@ -14,7 +14,7 @@ $loan = new Loan($db);
 $loan->userID = isset($_GET['userID']) ? $_GET['userID'] : die();
 $loan->skinID = isset($_GET['skinID']) ? $_GET['skinID'] : die();
 
-$loan->assembleLoanData();
+$loan->assembleLoan();
 
 $loan_arr = array(
     'userID' => $loan->userID,
@@ -22,6 +22,14 @@ $loan_arr = array(
     'tradeUrl' => $loan->tradeUrl
 );
 
-print_r(json_encode($loan_arr));
+if(isset($loan_arr)){
+    print_r(json_encode($loan_arr));
+}else{
+    print_r(json_encode(
+        array(
+            "Message" => "Invalid user/skin"
+        );
+    ))
+}
 
 ?>

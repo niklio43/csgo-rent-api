@@ -112,7 +112,7 @@ Class Loan{
             return false;
     }
 
-    public function assembleLoanData(){
+    public function assembleLoan(){
         $query = "SELECT userID, tradeUrl, skinID FROM user, skin WHERE user.userID = ? AND skin.skinID = ?";
 
         $stmt = $this->conn->prepare($query);
