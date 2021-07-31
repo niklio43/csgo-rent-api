@@ -22,6 +22,11 @@ $loan_arr = array(
     'tradeUrl' => $loan->tradeUrl
 );
 
+if(isset($loan_arr)){
 print_r(json_encode($loan_arr));
-
+}else{
+    echo json_encode(
+        array('message' => 'User/Skin does not exist!')
+    );
+}
 ?>
