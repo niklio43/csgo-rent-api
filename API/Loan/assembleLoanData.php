@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-include_once '../../config/Database.php';
-include_once '../../models/loan.php';
+include_once '../../Config/Database.php';
+include_once '../../Models/loan.php';
 
 
 $database = new Database();
